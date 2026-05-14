@@ -2,9 +2,12 @@
    VARIABLES Y ESTILOS GLOBALES
    ========================================= */
 :root {
-    --bg-pink: #FF7894;       /* Rosa vibrante del cartel */
-    --accent-cyan: #3CB7C2;   /* Cian para barra lateral y destacados */
-    --accent-yellow: #FFFFC0; /* Amarillo pálido para el footer */
+    --bg-pink: #FF7894;
+    /* Rosa vibrante del cartel */
+    --accent-cyan: #3CB7C2;
+    /* Cian para barra lateral y destacados */
+    --accent-yellow: #FFFFC0;
+    /* Amarillo pálido para el footer */
     --text-dark: #333333;
     --text-white: #FFFFFF;
     --nav-height: 80px;
@@ -19,7 +22,8 @@ body {
     margin: 0;
     padding: 0;
     color: var(--text-dark);
-    background-color: var(--bg-pink); /* Fondo base rosa */
+    background-color: var(--bg-pink);
+    /* Fondo base rosa */
 }
 
 /* =========================================
@@ -38,10 +42,12 @@ body {
 }
 
 .nav-logo img {
-    height: 60px; /* Tamaño optimizado */
+    height: 60px;
+    /* Tamaño optimizado */
     width: auto;
     display: block;
-    border-radius: 50%; /* Opcional: si el logo es cuadrado con fondo blanco */
+    border-radius: 50%;
+    /* Opcional: si el logo es cuadrado con fondo blanco */
 }
 
 .nav-links {
@@ -63,7 +69,7 @@ body {
     transition: all 0.3s ease;
 }
 
-.nav-links a:hover, 
+.nav-links a:hover,
 .nav-links a.active {
     color: var(--accent-cyan);
 }
@@ -88,6 +94,7 @@ body {
    ========================================= */
 .main-container {
     display: flex;
+    flex-direction: column; /* Esto apila las secciones una debajo de otra */
     min-height: calc(100vh - var(--nav-height) - 120px);
 }
 
@@ -121,23 +128,82 @@ body {
    ÁREA DE CONTENIDO (GRID)
    ========================================= */
 .content-area {
-    flex-grow: 1;
-    padding: 40px;
+    width: 100%; /* Asegura que ocupe todo el ancho */
+    padding: 0;   /* Quitamos el padding para que la imagen de portada llegue a los bordes */
     display: flex;
     flex-direction: column;
 }
 
+/* =========================================
+   HEADER CON ANIMACIÓN
+   ========================================= */
+/* =========================================
+   HEADER AJUSTADO HACIA ARRIBA
+   ========================================= */
 .main-header {
-    margin-bottom: 40px;
+    height: 70vh; /* 70% de la altura de la pantalla, mucho más estético */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    padding-top: 80px;
+    color: white;
 }
 
 .main-title {
     color: var(--text-white);
     text-transform: uppercase;
-    font-size: 42px; /* Más grande como en el cartel */
+    font-size: 65px;
+    /* Un pelín más grande para compensar la altura */
     line-height: 1.1;
     margin: 0;
     font-weight: 800;
+    text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.6);
+
+    animation: fadeUp 1.2s ease-out forwards;
+}
+
+.main-header p {
+    color: var(--text-white);
+    font-size: 26px;
+    margin-top: 15px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+
+    animation: fadeUp 1.2s ease-out 0.3s backwards;
+}
+
+.main-title span.red {
+    color: #B26767;
+    /* Rojo puro o puedes usar uno más suave como #E63946 */
+    display: inline-block;
+    /* Opcional: un poco más de tamaño para que resalten más */
+    font-size: 1.1em;
+}
+
+.main-title span {
+    color: #007872;
+    /* Rojo puro o puedes usar uno más suave como #E63946 */
+    display: inline-block;
+    /* Opcional: un poco más de tamaño para que resalten más */
+    font-size: 1.1em;
+}
+
+/* Mantenemos los Keyframes igual porque funcionan de maravilla */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .content-grid {
@@ -218,7 +284,8 @@ body {
 .footer-logos img {
     height: 45px;
     width: auto;
-    filter: grayscale(20%); /* Suaviza los logos */
+    filter: grayscale(20%);
+    /* Suaviza los logos */
 }
 
 .footer-text {
@@ -234,9 +301,10 @@ body {
    ========================================= */
 @media (max-width: 900px) {
     .content-grid {
-        grid-template-columns: 1fr; /* Una columna en tablets/móviles */
+        grid-template-columns: 1fr;
+        /* Una columna en tablets/móviles */
     }
-    
+
     .main-title {
         font-size: 32px;
     }
@@ -244,12 +312,97 @@ body {
 
 @media (max-width: 600px) {
     .sidebar {
-        display: none; /* Ocultamos sidebar en móviles muy pequeños */
+        display: none;
+        /* Ocultamos sidebar en móviles muy pequeños */
     }
+
     .main-nav {
         padding: 0 15px;
     }
+
     .nav-links {
-        display: none; /* Aquí iría un menú hamburguesa */
+        display: none;
+        /* Aquí iría un menú hamburguesa */
     }
+}
+
+/* =========================================
+   SECCIÓN DE INSTRUMENTOS
+   ========================================= */
+.instruments-section {
+    padding: 60px 40px;
+    /* Fondo blanco para contraste */
+}
+
+.section-title {
+    text-align: center;
+    color: #007872;
+    /* Verde del logo */
+    font-size: 36px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    font-weight: 800;
+}
+
+.instruments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.instrument-card {
+    background: #f9f9f9;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    border-bottom: 5px solid #B26767;
+    /* Rosa del logo */
+}
+
+.instrument-card:hover {
+    transform: translateY(-10px);
+}
+
+.instrument-img {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+.instrument-info {
+    padding: 20px;
+    text-align: center;
+}
+
+.instrument-info h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 22px;
+}
+
+.instrument-info p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.btn-more {
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: #007872;
+    /* Verde del logo */
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.btn-more:hover {
+    background-color: #B26767;
+    /* Cambio al rosa del logo */
 }
