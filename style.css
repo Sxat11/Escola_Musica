@@ -51,6 +51,7 @@ body {
 }
 
 .nav-links {
+    text-transform: uppercase;
     list-style: none;
     display: flex;
     gap: 25px;
@@ -591,5 +592,61 @@ body {
     .profesores-container {
         /* En pantallas medianas/pequeñas vuelve a 1 sola columna */
         grid-template-columns: 1fr; 
+    }
+}
+/* =========================================
+   REDISEÑO DE REDES SOCIALES EN EL NAV
+   ========================================= */
+.nav-socials {
+    display: flex;
+    align-items: center;
+    gap: 20px;          /* Espaciado elegante entre iconos */
+    margin-left: 35px;  /* Distancia con el logo circular de la escuela */
+    margin-right: auto; /* Empuja el menú de textos a la derecha */
+}
+
+.nav-socials a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.nav-socials img {
+    height: 34px;       /* Tamaño fino y proporcional al menú */
+    width: auto;
+    object-fit: contain;
+    transition: filter 0.3s ease; /* Transición suave para el cambio de color */
+
+    /* Forzamos a que todas las imágenes inicien en BLANCO absoluto */
+    filter: brightness(0) invert(1); 
+}
+
+/* Efecto de elevación al pasar el ratón (se aplica a todos) */
+.nav-socials a:hover {
+    transform: translateY(-3px); 
+}
+
+/* --- MAPA DE COLORES AL PASAR EL RATÓN (:HOVER) --- */
+
+/* Instagram -> Cambia a Rosa Fucsia Corporativo */
+.nav-socials a.instagram:hover img {
+    filter: invert(24%) sepia(87%) saturate(2978%) hue-rotate(323deg) brightness(93%) contrast(92%);
+}
+
+/* Facebook -> Cambia a Azul Oficial de Facebook */
+.nav-socials a.facebook:hover img {
+    filter: invert(39%) sepia(59%) saturate(4135%) hue-rotate(204deg) brightness(97%) contrast(97%);
+}
+
+/* YouTube -> Cambia a Rojo Puro de YouTube */
+.nav-socials a.youtube:hover img {
+    filter: invert(12%) sepia(95%) saturate(5940%) hue-rotate(359deg) brightness(97%) contrast(114%);
+}
+
+/* Ocultar en pantallas móviles para que no colapse el menú */
+@media (max-width: 900px) {
+    .nav-socials {
+        display: none;
     }
 }

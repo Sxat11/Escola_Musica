@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instrumento - Escola de Música Municipal de Meaño</title>
+    <style>
+        :root {
+            --logo-green: #007872;      
+            --logo-pink-dark: #B26767;  
+            --bg-light: #fdfdfd;        
+            --text-dark: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7f8;
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .detalle-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--bg-light);
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            border-bottom: 8px solid var(--logo-pink-dark);
+        }
+
+        .detalle-header {
+            background-color: var(--logo-green);
+            padding: 40px;
+            text-align: center;
+            color: white;
+        }
+
+        .detalle-header h1 {
+            font-size: 38px;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .detalle-header .categoria {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #bbf2ef;
+            font-weight: 600;
+        }
+
+        .detalle-content {
+            display: flex;
+            padding: 40px;
+            gap: 40px;
+        }
+
+        .col-principal {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .instrumento-grande-img {
+            width: 100%;
+            height: 350px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+
+        .descripcion-text {
+            font-size: 17px;
+            color: #444;
+            text-align: justify;
+        }
+
+        .descripcion-text p {
+            margin-bottom: 20px;
+        }
+
+        .col-lateral {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .ficha-tecnica {
+            background-color: #f8fafc;
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid #edf2f7;
+        }
+
+        .ficha-tecnica h3 {
+            color: var(--logo-green);
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: 700;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .info-row {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--logo-pink-dark);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .info-valor {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .actions-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            display: block;
+            text-align: center;
+            padding: 12px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary { background-color: var(--logo-green); color: white; }
+        .btn-primary:hover { background-color: #005a55; transform: translateY(-2px); }
+        .btn-secondary { background-color: #f1f5f9; color: #475569; }
+        .btn-secondary:hover { background-color: #e2e8f0; }
+
+        /* Estado de error por si el hash no es válido */
+        .error-message { display: none; text-align: center; padding: 50px; }
+
+        @media (max-width: 768px) {
+            .detalle-content { flex-direction: column; padding: 25px; gap: 30px; }
+            .instrumento-grande-img { height: 250px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="detalle-container" id="vista-instrumento">
+        <header class="detalle-header">
+            <h1 id="ins-nombre">Instrumento</h1>
+            <span class="categoria" id="ins-familia">Familia</span>
+        </header>
+
+        <div class="detalle-content">
+            <main class="col-principal">
+                <div class="instrumento-grande-img" id="ins-imagen"></div>
+                <div class="descripcion-text" id="ins-descripcion">
+                    </div>
+            </main>
+
+            <aside class="col-lateral">
+                <div class="ficha-tecnica">
+                    <h3>Ficha Técnica</h3>
+                    
+                    <div class="info-row">
+                        <span class="info-label" id="label-extra">Característica</span>
+                        <span class="info-valor" id="ins-extra">--</span>
+                    </div>
+
+                    <div class="info-row">
+                        <span class="info-label">Variantes</span>
+                        <span class="info-valor" id="ins-variantes">--</span>
+                    </div>
+
+                    <div class="info-row">
+                        <span class="info-label">Coste clases</span>
+                        <span class="info-valor" id="ins-coste">--</span>
+                    </div>
+
+                    <div class="info-row">
+                        <span class="info-label">Agrupaciones</span>
+                        <span class="info-valor" id="ins-agrupaciones">--</span>
+                    </div>
+                </div>
+
+                <div class="actions-container">
+                    <a href="contacto.html" class="btn btn-primary">Solicitar Información</a>
+                    <a href="index.html" class="btn btn-secondary">← Volver</a>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <div class="error-message" id="vista-error">
+        <h2>Instrumento no encontrado</h2>
+        <p>El instrumento solicitado no está registrado o la dirección es incorrecta.</p>
+        <br>
+        <a href="index.html" class="btn btn-secondary" style="display:inline-block;">Volver al inicio</a>
+    </div>
+
+    <script>
+        // 1. Creamos la "base de datos" con la información de cada instrumento
+        const baseDatosInstrumentos = {
+            saxophone: {
+                nombre: "Saxofón",
+                familia: "Familia de Viento-Madera",
+                imagen: "saxofon_grande.jpg",
+                descripcion: [
+                    "El saxofón es uno de los instrumentos más expresivos y versátiles de nuestra banda sinfónica. Aunque está construido de latón, pertenece a la familia de viento-madera debido a que su sonido se produce mediante una caña.",
+                    "En la Escola de Música Municipal de Meaño, el aprendizaje del saxofón abarca tanto el dominio técnico clásico como la exploración de agrupaciones modernas."
+                ],
+                labelExtra: "Tipo de caña",
+                extra: "Sencilla (Madera)",
+                variantes: "Alto, Tenor y Soprano",
+                coste: "50€",
+                agrupaciones: "Banda Infantil, Juvenil y Sinfónica"
+            },
+            clarinet: {
+                nombre: "Clarinete",
+                familia: "Familia de Viento-Madera",
+                imagen: "clarinete_grande.jpg",
+                descripcion: [
+                    "El clarinete destaca por su sonido dulce, profundo y su enorme agilidad técnica. Es una pieza fundamental que aporta la calidez armónica y el cuerpo principal a las secciones de madera de la banda.",
+                    "Los estudiantes aprenden el control de la embocadura y la respiración, pilares indispensables para dominar este maravilloso instrumento desde las primeras etapas."
+                ],
+                labelExtra: "Material común",
+                extra: "Madera de Ébano / Resina",
+                variantes: "Soprano en Si bemol, Requinto",
+                coste: "50€",
+                agrupaciones: "Banda Infantil, Juvenil y Sinfónica"
+            },
+            trumpet: {
+                nombre: "Trompeta",
+                familia: "Familia de Viento-Metal",
+                imagen: "trompeta_grande.jpg",
+                descripcion: [
+                    "La trompeta es la reina de la brillantez y la potencia en las secciones de metal. Con su sistema de tres pistones, ofrece un sonido vibrante capaz de liderar las melodías más heroicas de nuestro repertorio.",
+                    "En nuestras aulas trabajamos la técnica del aire, la flexibilidad de labios y la precisión rítmica necesarias para destacar tanto en desfiles como en conciertos de gala."
+                ],
+                labelExtra: "Mecanismo",
+                extra: "3 Pistones de acción rápida",
+                variantes: "Trompeta en Si bemol, Corneta",
+                coste: "50€/mes",
+                agrupaciones: "Banda de Música y Agrupaciones de Metal"
+            }
+        };
+
+        // 2. Función que lee la URL y cambia el contenido
+        function cargarContenidoInstrumento() {
+            // Obtenemos el hash (quitándole el símbolo #) y lo pasamos a minúsculas
+            const hash = window.location.hash.substring(1).toLowerCase();
+            
+            // Buscamos si el instrumento existe en nuestra base de datos
+            const datos = baseDatosInstrumentos[hash];
+
+            const vistaInstrumento = document.getElementById('vista-instrumento');
+            const vistaError = document.getElementById('vista-error');
+
+            if (datos) {
+                // Si existe, mostramos la tarjeta y ocultamos el error
+                vistaInstrumento.style.display = 'block';
+                vistaError.style.display = 'none';
+
+                // Reemplazamos los textos e imágenes en el HTML
+                document.getElementById('ins-nombre').innerText = datos.nombre;
+                document.getElementById('ins-familia').innerText = datos.familia;
+                document.getElementById('ins-imagen').style.backgroundImage = `url('${datos.imagen}')`;
+                document.getElementById('ins-extra').innerText = datos.extra;
+                document.getElementById('label-extra').innerText = datos.labelExtra;
+                document.getElementById('ins-variantes').innerText = datos.variantes;
+                document.getElementById('ins-coste').innerText = datos.coste;
+                document.getElementById('ins-agrupaciones').innerText = datos.agrupaciones;
+                
+                // Actualizamos también el título de la pestaña del navegador
+                document.title = `${datos.nombre} - Escola de Música Municipal de Meaño`;
+
+                // Procesamos los párrafos de la descripción
+                const contenedorDesc = document.getElementById('ins-descripcion');
+                contenedorDesc.innerHTML = ""; // Limpiamos lo anterior
+                datos.descripcion.forEach(parrafo => {
+                    const p = document.createElement('p');
+                    p.innerHTML = parrafo;
+                    contenedorDesc.appendChild(p);
+                });
+
+            } else {
+                // Si no se pone ningún hash o está mal escrito, enseñamos el bloque de error
+                vistaInstrumento.style.display = 'none';
+                vistaError.style.display = 'block';
+                document.title = "Instrumento no encontrado";
+            }
+        }
+
+        // 3. Ejecutar la función cuando se carga la página por primera vez
+        window.addEventListener('load', cargarContenidoInstrumento);
+        
+        // 4. Ejecutar la función si el usuario cambia el hash sin recargar (ej. hace clic en otro enlace)
+        window.addEventListener('hashchange', cargarContenidoInstrumento);
+    </script>
+</body>
+</html>

@@ -7,7 +7,7 @@
     <title>Escola de Música Municipal de Meaño - Inicio</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/your-fontawesome-key.js" crossorigin="anonymous"></script>
-    <link rel="icon" href="logo.png" type="image/png">  
+    <link rel="icon" href="logo.png" type="image/png">
 </head>
 
 <body>
@@ -15,20 +15,34 @@
         <div class="nav-logo">
             <img src="logo.png" alt="Logo Escuela">
         </div>
+      <div class="nav-socials">
+    <a href="https://instagram.com/tu_perfil" target="_blank" class="instagram" title="Instagram">
+        <img src="insta.png" alt="Instagram">
+    </a>
+    <a href="https://facebook.com/tu_perfil" target="_blank" class="facebook" title="Facebook">
+        <img src="face.png" alt="Facebook">
+    </a>
+    <a href="https://youtube.com/tu_canal" target="_blank" class="youtube" title="YouTube">
+        <img src="yt.png" alt="YouTube">
+    </a>
+</div>
+
         <ul class="nav-links">
-            <li><a href="#" class="active">Inicio</a></li>
-            <li><a href="#">Instrumentos</a></li>
-            <li><a href="#">Historia</a></li>
-            <li><a href="#">Profesorado</a></li>
-            <li><a href="#">Preescolar</a></li> 
-            <li><a href="#" class="nav-btn" onclick="location.href='contacto.html'">Contacto</a></li>
+            <li><a href="#inicio" class="nav-link-item active">Inicio</a></li>
+            <li><a href="#instrumentos" class="nav-link-item">Instrumentos</a></li>
+            <li><a href="#historia" class="nav-link-item">Historia</a></li>
+            <li><a href="#profesorado" class="nav-link-item">Profesorado</a></li>
+            <li><a href="#preescolar" class="nav-link-item">Preescolar</a></li>
+            <li><a href="#colaboracions" class="nav-link-item">Colaboracions</a></li>
+            <li><a href="contacto.html" class="nav-btn">Contacto</a></li>
         </ul>
+
     </nav>
 
     <main class="main-container">
 
 
-        <section class="content-area">
+        <section class="content-area" id="inicio">
             <header class="main-header" style="background-image: url('banda_portada.jpeg');">
                 <h1 class="main-title center">
                     <span class="red">E</span>SCOLA DE <span>M</span>ÚSICA <span>M</span>UNICIPAL DE
@@ -36,13 +50,11 @@
                 </h1>
                 <p>Formación musical de calidade</p>
             </header>
-
-
         </section>
 
 
 
-        <section class="instruments-section">
+        <section class="instruments-section" id="instrumentos">
             <h2 class="section-title">Nuestros Instrumentos</h2>
             <div class="instruments-grid">
                 <div class="instrument-card">
@@ -50,7 +62,7 @@
                     <div class="instrument-info">
                         <h3>Saxofón</h3>
                         <p>Versatilidad y brillo para nuestra banda sinfónica.</p>
-                        <a href="#" class="btn-more">Saber más</a>
+                        <a href="instrumento.html#saxophone" class="btn-more">Saber más</a>
                     </div>
                 </div>
 
@@ -59,7 +71,7 @@
                     <div class="instrument-info">
                         <h3>Clarinete</h3>
                         <p>La esencia de la madera con un sonido dulce y profundo.</p>
-                        <a href="#" class="btn-more">Saber más</a>
+                        <a href="instrumento.html#clarinet" class="btn-more">Saber más</a>
                     </div>
                 </div>
 
@@ -131,7 +143,7 @@
             </div>
         </section>
 
-        <section class="historia-section">
+        <section class="historia-section" id="historia">
             <div class="historia-container">
                 <h2 class="historia-title">Nuestra Historia</h2>
 
@@ -148,7 +160,7 @@
                 </div>
             </div>
         </section>
-        <section class="profesores-section">
+        <section class="profesores-section" id="profesorado">
             <h2 class="section-title-profes">Nuestro Profesorado</h2>
             <p class="profes-subtitle">Un equipo de profesionales titulados y en activo, dedicados a transmitir la
                 pasión por la música.</p>
@@ -204,7 +216,7 @@
                             banda juvenil.</p>
                     </div>
                 </div>
-               
+
             </div>
         </section>
 
@@ -228,3 +240,37 @@
 </body>
 
 </html>
+<script>
+    // Seleccionamos todos los enlaces del menú y todas las secciones con ID
+    const links = document.querySelectorAll('.nav-link-item');
+    const sections = document.querySelectorAll('header[id], section[id]');
+
+    function activarMenuOnScroll() {
+        let scrollPos = window.scrollY || document.documentElement.scrollTop;
+
+        // Sumamos la altura del menú para ajustar con precisión el punto de cambio
+        const navHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 80;
+
+        sections.forEach(section => {
+            // Evaluamos si la sección está cruzando el visor de la pantalla
+            if (scrollPos >= (section.offsetTop - navHeight - 20) &&
+                scrollPos < (section.offsetTop + section.offsetHeight - navHeight)) {
+
+                let currentId = section.getAttribute('id');
+
+                // Quitamos la clase 'active' de todos los enlaces y se la ponemos al actual
+                links.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${currentId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }
+
+    // Ejecuta la función cuando el usuario hace scroll
+    window.addEventListener('scroll', activarMenuOnScroll);
+    // Ejecuta la función al cargar la página por primera vez
+    window.addEventListener('load', activarMenuOnScroll);
+</script>
